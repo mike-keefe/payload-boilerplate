@@ -1,67 +1,43 @@
-# Payload Blank Template
+# Payload CMS Project Template
 
-This template comes configured with the bare minimum to get started on anything you need.
+A production-ready Payload CMS 3.x + Next.js template with guided project setup built in.
 
-## Quick start
+## Using this template
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+1. Click **"Use this template"** on GitHub to create a new repo
+2. Clone your new repo locally
+3. Open Claude Code: `claude`
+4. Claude will automatically detect this is a fresh clone and guide you through setup
 
-## Quick Start - local setup
+The guided setup will:
 
-To spin up this template locally, follow these steps:
+- Interview you about what you're building
+- Configure the project for your specific needs
+- Generate research tasks and investigate them in parallel
+- Scaffold your initial Payload collections
+- Leave the project ready to build
 
-### Clone
+## What's included
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+| Category        | Tools                                                             |
+| --------------- | ----------------------------------------------------------------- |
+| Framework       | Next.js App Router + Payload CMS 3.x                              |
+| Language        | TypeScript (strict mode)                                          |
+| Database        | PostgreSQL                                                        |
+| Package manager | pnpm                                                              |
+| Linting         | ESLint (flat config) + Prettier + Husky pre-commit hooks          |
+| Testing         | Vitest + React Testing Library + Playwright                       |
+| CI/CD           | GitHub Actions (validate → test → build)                          |
+| Security        | Secret scanning (gitleaks), dependency auditing, security headers |
+| Observability   | Sentry scaffold, structured logging, health check endpoint        |
+| Local dev       | Docker Compose (PostgreSQL)                                       |
+| DX              | Claude Code commands, CLAUDE.md, CONTRIBUTING.md                  |
 
-### Development
+## Manual setup (without Claude Code)
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+If you're not using Claude Code, follow the manual setup in [`docs/manual-setup.md`](docs/manual-setup.md).
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+## Template maintenance
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
-
-#### Docker (Optional)
-
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
-
-To do so, follow these steps:
-
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
-
-## How it works
-
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
-
-### Collections
-
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
-
-- #### Users (Authentication)
-
-  Users are auth-enabled collections that have access to the admin panel.
-
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/3.x/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
-
-- #### Media
-
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
-
-### Docker
-
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
-
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
-
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
-
-## Questions
-
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+This template is maintained separately from client projects.
+Do not copy client-specific config back into this template.
