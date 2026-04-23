@@ -1,0 +1,5 @@
+title = "Gitleaks config"
+
+[allowlist]
+  description = "Allow example/placeholder values"
+  paths = [".env.example"]
