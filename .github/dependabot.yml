@@ -6,17 +6,35 @@ updates:
       interval: weekly
       day: monday
       time: '09:00'
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10
     groups:
+      # Minor/patch dev-dependency updates are safe to batch.
       dev-dependencies:
         dependency-type: development
+        update-types:
+          - minor
+          - patch
+      # Group Payload updates (they're designed to be bumped together).
       payload:
         patterns:
           - payload
           - '@payloadcms/*'
+        update-types:
+          - minor
+          - patch
+          - major
+    # Major version bumps of other packages come through as their own PRs
+    # so they get reviewed individually — a template shouldn't merge majors automatically.
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
       day: monday
       time: '09:00'
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+        update-types:
+          - minor
+          - patch
