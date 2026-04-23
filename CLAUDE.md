@@ -12,7 +12,7 @@ This file is read automatically by Claude Code at the start of every session.
 cat .claude/state/setup-complete 2>/dev/null
 ```
 
-- **If the file does not exist**: This is a fresh clone of the template. Run `/project:setup` immediately and do not proceed with any other work until setup is complete.
+- **If the file does not exist**: This is a fresh clone of the template. Read `.claude/commands/setup.md` and follow it from the top — that file is the guided setup flow (pre-flight checks, discovery, scaffolding). Do not proceed with any other work until setup is complete and `.claude/state/setup-complete` has been written.
 - **If the file exists**: Setup is done. Continue normally with the session.
 
 ---

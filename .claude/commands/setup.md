@@ -7,6 +7,40 @@ When setup is complete, write the file `.claude/state/setup-complete` with the c
 
 ---
 
+## Pre-flight — Verify the developer's environment
+
+Before showing the welcome message, silently run these checks and **only surface the ones that fail**. For each failure, tell the developer what's missing in plain language and the exact command to fix it, then wait for them to confirm it's sorted before re-checking.
+
+Run the checks in this order:
+
+1. **Node version ≥ 20.9**
+   Command: `node --version`
+   If missing or below 20.9: "Node.js 20.9+ is required. Install from https://nodejs.org (LTS is fine) or via your version manager (nvm, fnm, volta). Let me know when ready and I'll re-check."
+
+2. **pnpm installed**
+   Command: `pnpm --version`
+   If missing: "This template uses pnpm (not npm/yarn). Install with: `npm install -g pnpm` or `corepack enable && corepack prepare pnpm@latest --activate`. Let me know when ready."
+
+3. **Dependencies installed**
+   Command: `test -d node_modules && echo ok || echo missing`
+   If missing: **auto-run `pnpm install`** (no need to ask — this is the obvious fix). Report what it installed and continue.
+
+4. **Docker available (for local Postgres)**
+   Command: `docker info > /dev/null 2>&1 && echo ok || echo missing`
+   If missing: "Docker is needed for the local Postgres database. Install Docker Desktop from https://docker.com/products/docker-desktop, start it, then let me know. If you plan to use a hosted Postgres instead (Neon, Supabase, Railway, etc.), tell me and we'll skip this check."
+
+5. **gh CLI authenticated**
+   Command: `gh auth status 2>&1`
+   If not authenticated: "Phase 2 creates GitHub issues for research spikes — that needs the `gh` CLI authenticated. Run `gh auth login` (pick GitHub.com, SSH protocol is fine), then tell me when done. If you'd rather skip the GitHub-issue step, tell me and we'll run research without the issues."
+
+6. **`.env` file exists**
+   Command: `test -f .env && echo ok || echo missing`
+   If missing AND `.env.example` exists: **auto-run `cp .env.example .env`** and tell the developer: "I've copied `.env.example` to `.env`. You'll need to fill in `PAYLOAD_SECRET` before running the dev server — generate one with `openssl rand -base64 32` and paste it in. The other values have sensible defaults for local dev."
+
+Once all checks pass (or the developer has explicitly opted out of Docker/gh), continue to Phase 0 — Welcome.
+
+---
+
 ## Phase 0 — Welcome
 
 Tell the developer:
